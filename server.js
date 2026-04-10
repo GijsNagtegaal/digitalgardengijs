@@ -28,7 +28,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const engine = new Liquid();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5500;
 
 // Database
 const pool = new Pool({
@@ -99,6 +99,10 @@ app.get('/createnotes', async (req, res) => {
   res.render("createnotes.liquid")
 })
 
+app.get('/playgarden', async (req, res) => {
+  res.render("expirimentjes.liquid")
+})
+
 app.get('/edit/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -133,7 +137,7 @@ app.post('/api/notes/update/:id', async (req, res) => {
         `;
         const values = [title, content, category, topic, external_url, additional_links, id];
 
-        await pool.query(query, values);
+        await pool.query(query, values); 
         res.redirect('/'); 
     } catch (err) {
         console.error("DATABASE ERROR:", err); // Look at your terminal for the real error!
@@ -179,3 +183,4 @@ app.post('/api/notes', upload.single('attachment'), async (req, res) => {
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Garden is growing at http://localhost:${PORT}`);
 });
+

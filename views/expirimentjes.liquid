@@ -138,6 +138,113 @@
 				</li>
 			</ul>
         </section>
+
+        <style>
+            .safari-switch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .switch-label {
+            position: relative;
+            display: inline-block;
+            width: 280px;
+            height: 44px;
+            cursor: pointer;
+        }
+
+        /* Hide the native checkbox input */
+        .basic-with-symbol[switch] {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+
+        /* The background track */
+        .switch-design {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #eee;
+            border: 2px solid white;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+
+        /* The labels inside the switch */
+        .text-in, .text-out {
+            flex: 1;
+            z-index: 2;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--dark-text, #333);
+            transition: color 0.3s ease;
+        }
+
+        /* The sliding physical part */
+        .slider {
+            position: absolute;
+            z-index: 1;
+            top: 2px;
+            left: 2px;
+            width: calc(50% - 4px);
+            height: calc(100% - 4px);
+            background-color: var(--active, #2c3e50);
+            border-radius: 0.8rem;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- THE LOGIC --- */
+
+        /* 1. Move slider when checked */
+        .basic-with-symbol[switch]:checked + .switch-design .slider {
+            transform: translateX(100%);
+        }
+
+        /* 2. Highlight "In Bloei" when NOT checked */
+        .basic-with-symbol[switch]:not(:checked) + .switch-design .text-in {
+            color: white;
+        }
+
+        /* 3. Highlight "Niet in Bloei" when checked */
+        .basic-with-symbol[switch]:checked + .switch-design .text-out {
+            color: white;
+        }
+
+        /* Simple Submit Button styling */
+        .apply-btn {
+            height: 44px;
+            padding: 0 1rem;
+            border-radius: 1rem;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+        }
+        </style>
+        <section class="safari-switch">
+            <form id="bloom-filter">
+                <label class="switch-container">
+                    <input 
+                        class="basic-with-symbol" 
+                        type="checkbox" 
+                        switch 
+                        {% if current_path == '/collectie/not_in_bloom' %}checked{% endif %}
+                    >
+                    
+                    <div class="switch-track">
+                        <span class="label-left">In Bloei</span>
+                        <span class="label-right">Niet in Bloei</span>
+                        <div class="switch-handle"></div>
+                    </div>
+                </label>
+            </form>
+        </section>
     </main>
 </body>
 </html>
