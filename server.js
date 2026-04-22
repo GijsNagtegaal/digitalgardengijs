@@ -28,7 +28,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const engine = new Liquid();
-const PORT = process.env.PORT || 5500;
+const PORT = process.env.PORT || 8005;
 
 // Database
 const pool = new Pool({
