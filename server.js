@@ -11,6 +11,7 @@ import noteRoute from './routes/note.js';
 import createnotesRoute from './routes/createnotes.js';
 import editRoute from './routes/edit.js';
 import playgardenRoute from './routes/playgarden.js';
+import cssChallengeRoute from './routes/css-challenge.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -35,6 +36,7 @@ app.use(noteRoute);
 app.use(createnotesRoute);
 app.use(editRoute);
 app.use(playgardenRoute);
+app.use(cssChallengeRoute);
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Garden is growing at http://localhost:${PORT}`);
